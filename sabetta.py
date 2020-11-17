@@ -6,15 +6,15 @@ def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 	function for the generation of non-stationary accelerograms 
 	adapted from original fortran program of Sabetta F. and Pugliese A. (1995)
 	======================================================================= 
-	input parameters: 
-	Mw = moment magnitude; 
-	Re = epicentral distance (km);
-	isito = site conditions (0=rock; 1=shallow all.; 2=deep alluvium); 
+	input parameters
+	Mw = moment magnitude
+	Re = epicentral distance (km)
+	isito = site conditions (0=rock; 1=shallow all.; 2=deep alluvium)
 	isig = st. dev. of GMPE (0=median value,1=84th percentile)
 	dt = time step of output accelerogram
 	nacc = number of accelerograms to be generated
+	tot_dur = total duration of accelerogram
 	scale = scale factor (1 for cm/s/s)
-	ivd = flag for output in velocity and displacement 
 	======================================================================= 
 	output
 	t = time vector (s)
