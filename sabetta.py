@@ -1,6 +1,5 @@
 def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 	import numpy as np
-	from scipy.stats import lognorm
 	nacc = int(nacc)
 	'''======================================================================= 
 	function for the generation of non-stationary accelerograms 
@@ -48,8 +47,7 @@ def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 	T3 = T1 + 2.5*DV
 	TFc = T2 - 3.5 - Re/50
 	T_cost = T2 + 0.5*DV
-	# total duration of accelerogram
-	T4 = tot_dur - T1 
+	T4 = tot_dur - T1
 	T_fond = T4/3
 	fo = 1/T_fond
 
@@ -66,8 +64,7 @@ def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 	# mean value 
 	med_Pa = np.log(T2) + sqm_Pa**2 
 	Pa = np.zeros(nt) 
-	Pa = Ia*lognorm.pdf(t,med_Pa,sqm_Pa)
-
+	Pa = Ia* (np.exp(-(np.log(t) - med_Pa)**2 / (2 * sqm_Pa**2)) / (t * sqm_Pa * np.sqrt(2 * np.pi)))
 	t_val = t - TFc
 	for i in range(len(t)):
 		if t_val[i] < 1:
@@ -82,8 +79,8 @@ def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 	# empirical regression for the ratio Fb/Fc between the frequency bandwidth 
 	# and the central frequency
 	Fb_Fc = 0.44 + 0.07*Mw - 0.08*S1 + 0.03*S2
+
 	delta = np.sqrt(np.log(1+Fb_Fc**2))
-	ln_beta = np.zeros(nt)
 	ln_beta = np.log(Fc) - 0.5*delta**2
 	   
 	f = np.arange(fo,fmax,fo)
@@ -116,7 +113,6 @@ def sabetta(Mw,Re,Re1,isito,isig,dt,nacc,tot_dur,scale):
 			vel[i,k] = np.sum(Ccos_vel)
 			# dis in cm
 			dis[i,k] = np.sum(Ccos_dis)
-
 	acc = acc*scale 
 	vel = vel*scale 
 	dis = dis*scale
