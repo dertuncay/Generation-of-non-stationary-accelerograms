@@ -27,5 +27,11 @@ vel = velocity time history (in cm/s)
 
 disp = displacement time history (in cm)
 
+## Dependencies
+
+* [numpy](https://numpy.org/)
+
+* [scipy](https://www.scipy.org/)
+
 ## Citation
 Sabetta, Fabio, and Antonio Pugliese. "Estimation of response spectra and simulation of nonstationary earthquake ground motions." Bulletin of the Seismological Society of America 86.2 (1996): 337-352.
